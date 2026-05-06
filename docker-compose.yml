@@ -1,0 +1,22 @@
+name: learning_platform
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: learning-pg
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: learning_platform
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+      - ./src/db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+
+volumes:
+  pg_data:
