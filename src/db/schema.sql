@@ -24,9 +24,11 @@ CREATE TABLE submissions (
 );
 
 CREATE TABLE progress (
-    
   user_id INT REFERENCES users(id),
   course_id INT REFERENCES courses(id),
   completion_percentage NUMERIC(5,2) DEFAULT 0,
   PRIMARY KEY (user_id, course_id)
 );
+
+-- to execute this sql table in db
+-- docker exec -i learning-pg psql -U admin -d learning_platform < src/db/schema.sql

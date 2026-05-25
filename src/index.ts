@@ -1,7 +1,10 @@
-import { Elysia } from "elysia";
+import { Elysia, env } from "elysia";
+import { submitController } from "./controllers/submitController";
 
-const app = new Elysia().get("/", () => "Hello Elysia").listen(3000);
+const PORT = env.PORT;
 
-console.log(
-  `🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`
-);
+const app = new Elysia()
+  .use(submitController)
+  .listen(PORT, () =>
+    console.log(`Server running on http://localhost:${PORT}`),
+  );
